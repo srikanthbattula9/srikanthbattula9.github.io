@@ -368,10 +368,73 @@
   }
   :focus-visible{outline:2.5px solid var(--accent);outline-offset:3px;border-radius:6px;}
 
+
+  /* ===== Interactivity layer ===== */
+
+  /* Preloader */
+  .preloader{position:fixed;inset:0;z-index:9998;background:var(--bg);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:20px;transition:opacity .6s ease, visibility .6s ease;}
+  .preloader.done{opacity:0;visibility:hidden;}
+  .pre-line{font-family:var(--mono);font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-3);display:flex;gap:11px;align-items:center;}
+  .pre-line .blink{width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 10px 1px var(--glow);animation:pulse 1.2s infinite;}
+  .pre-count{font-family:var(--display);font-weight:700;font-size:clamp(60px,13vw,128px);letter-spacing:-.03em;line-height:1;background:linear-gradient(180deg,#fff,#8fa6b0);-webkit-background-clip:text;background-clip:text;color:transparent;}
+  .pre-bar{width:min(260px,60vw);height:2px;background:var(--line);border-radius:2px;overflow:hidden;}
+  .pre-bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--accent-2),var(--accent));box-shadow:0 0 12px var(--glow);}
+
+  /* Scroll progress */
+  .scroll-prog{position:fixed;top:0;left:0;height:3px;width:0;z-index:70;background:linear-gradient(90deg,var(--accent-2),var(--accent));box-shadow:0 0 12px var(--glow);}
+
+  /* Custom cursor (fine pointers only) */
+  @media (pointer:fine){
+    body.cursor-on, body.cursor-on a, body.cursor-on button, body.cursor-on .btn{cursor:none;}
+    .cur-dot{position:fixed;top:0;left:0;width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 10px 1px var(--glow);transform:translate(-50%,-50%);z-index:10000;pointer-events:none;opacity:0;transition:opacity .3s;}
+    .cur-ring{position:fixed;top:0;left:0;width:34px;height:34px;border:1.5px solid var(--accent-line);border-radius:50%;transform:translate(-50%,-50%);z-index:9999;pointer-events:none;opacity:0;transition:width .22s ease,height .22s ease,background .22s ease,border-color .22s ease,opacity .3s;}
+    .cur-ring.grow{width:64px;height:64px;background:rgba(47,211,168,.08);border-color:var(--accent);}
+    .cur-label{position:fixed;top:0;left:0;z-index:10001;transform:translate(-50%,-50%);font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:#04120E;background:var(--accent);padding:5px 10px;border-radius:20px;pointer-events:none;opacity:0;transition:opacity .2s ease;white-space:nowrap;box-shadow:0 0 20px -6px var(--glow);}
+    .cur-label.show{opacity:1;}
+  }
+  @media (pointer:coarse){ .cur-dot,.cur-ring,.cur-label{display:none !important;} }
+
+  /* Tech marquee */
+  .marquee{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--bg-2);overflow:hidden;padding:17px 0;position:relative;}
+  .marquee::before,.marquee::after{content:"";position:absolute;top:0;bottom:0;width:90px;z-index:2;pointer-events:none;}
+  .marquee::before{left:0;background:linear-gradient(90deg,var(--bg-2),transparent);}
+  .marquee::after{right:0;background:linear-gradient(270deg,var(--bg-2),transparent);}
+  .marquee-track{display:flex;width:max-content;white-space:nowrap;animation:scrollx 30s linear infinite;}
+  .marquee:hover .marquee-track{animation-play-state:paused;}
+  .marquee-track span{font-family:var(--display);font-weight:600;font-size:clamp(17px,2.3vw,25px);color:var(--ink-2);letter-spacing:-.01em;display:inline-flex;align-items:center;}
+  .marquee-track span.alt{color:var(--accent);text-shadow:0 0 20px var(--glow);}
+  .marquee-track span::after{content:"";width:6px;height:6px;border-radius:50%;background:var(--accent);box-shadow:0 0 8px var(--glow);margin:0 28px;opacity:.75;flex:none;}
+  @keyframes scrollx{to{transform:translateX(-50%);}}
+
+  /* Cursor-follow spotlight on cards */
+  .project,.skill-card,.lesson{position:relative;}
+  .skill-card,.lesson{overflow:hidden;}
+  .spot::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:0;transition:opacity .35s ease;background:radial-gradient(240px circle at var(--mx,50%) var(--my,50%), rgba(47,211,168,.13), transparent 62%);z-index:1;}
+  .spot.lit::after{opacity:1;}
+  .project .project-top{position:relative;z-index:2;}
+  .skill-card>*,.lesson>*{position:relative;z-index:2;}
+
+  .magnetic{will-change:transform;}
+  .hero-bg,.panel{will-change:transform;}
+
+  @media (prefers-reduced-motion:reduce){
+    .marquee-track{animation:none !important;}
+    .preloader{display:none !important;}
+  }
+
 </style>
 </head>
 <body>
 <div class="page-bg" aria-hidden="true"></div>
+<div class="scroll-prog" id="scrollProg" aria-hidden="true"></div>
+<div class="cur-ring" id="curRing" aria-hidden="true"></div>
+<div class="cur-dot" id="curDot" aria-hidden="true"></div>
+<div class="cur-label" id="curLabel" aria-hidden="true"></div>
+<div class="preloader" id="preloader" aria-hidden="true">
+  <div class="pre-line"><span class="blink"></span> initializing pipeline</div>
+  <div class="pre-count" id="preCount">0</div>
+  <div class="pre-bar"><i id="preBar"></i></div>
+</div>
 
 <!-- ============ NAV ============ -->
 <header class="nav" id="nav">
@@ -489,6 +552,10 @@
     </div>
   </div>
 </section>
+
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track"><span class="alt">SQL</span><span>Python</span><span>PostgreSQL</span><span>FastAPI</span><span class="alt">SQLAlchemy</span><span>Pydantic</span><span>ETL / ELT</span><span>Data Modeling</span><span class="alt">Data Validation</span><span>Event-Driven</span><span>Git</span><span>GitHub</span><span class="alt">SQL</span><span>Python</span><span>PostgreSQL</span><span>FastAPI</span><span class="alt">SQLAlchemy</span><span>Pydantic</span><span>ETL / ELT</span><span>Data Modeling</span><span class="alt">Data Validation</span><span>Event-Driven</span><span>Git</span><span>GitHub</span></div>
+</div>
 
 <!-- ============ ABOUT ============ -->
 <section class="about" id="about">
@@ -622,7 +689,7 @@
             <span>Python</span><span>FastAPI</span><span>PostgreSQL</span><span>SQLAlchemy</span><span>Pydantic</span><span>SQL</span><span>Git</span>
           </div>
           <div class="p-actions">
-            <a href="https://github.com/srikanthbattula9" target="_blank" rel="noopener" class="btn btn-primary">
+            <a href="https://github.com/srikanthbattula9" target="_blank" rel="noopener" class="btn btn-primary" data-cursor="Open repo">
               <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.2.8-.5v-2c-3.2.7-3.9-1.4-3.9-1.4-.5-1.3-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.7 1.3 3.4 1 .1-.8.4-1.3.8-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.4-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.2 1.2a11 11 0 0 1 5.8 0C17.3 5 18.3 5.3 18.3 5.3c.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .3.2.6.8.5 4.6-1.5 7.9-5.8 7.9-10.9C23.5 5.7 18.3.5 12 .5Z"/></svg>
               View repo
             </a>
@@ -934,6 +1001,109 @@
   if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches){
     document.querySelectorAll('.hero-bg svg').forEach(s => { try{ s.pauseAnimations(); }catch(e){} });
   }
+
+  /* ===== Interactivity ===== */
+  (function(){
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var fine = window.matchMedia && window.matchMedia('(pointer:fine)').matches;
+
+    /* Preloader */
+    var pre = document.getElementById('preloader');
+    var preCount = document.getElementById('preCount');
+    var preBar = document.getElementById('preBar');
+    function finishPre(){ if(pre){ pre.classList.add('done'); } document.body.classList.add('ready'); }
+    if (reduce || !pre){ finishPre(); }
+    else {
+      var start=null, dur=1500;
+      function step(t){
+        if(!start) start=t;
+        var p=Math.min((t-start)/dur,1);
+        var eased=1-Math.pow(1-p,2);
+        var val=Math.round(eased*100);
+        preCount.textContent=val;
+        preBar.style.width=val+'%';
+        if(p<1){ requestAnimationFrame(step); } else { setTimeout(finishPre,180); }
+      }
+      requestAnimationFrame(step);
+      setTimeout(finishPre,3200); /* safety */
+    }
+
+    /* Scroll progress */
+    var prog=document.getElementById('scrollProg');
+    function onProg(){
+      var h=document.documentElement.scrollHeight-window.innerHeight;
+      var p=h>0?(window.scrollY/h)*100:0;
+      prog.style.width=p+'%';
+    }
+    onProg(); window.addEventListener('scroll',onProg,{passive:true});
+    window.addEventListener('resize',onProg);
+
+    /* Custom cursor + magnetic + spotlight only on fine pointers */
+    if (fine && !('ontouchstart' in window)){
+      document.body.classList.add('cursor-on');
+      var dot=document.getElementById('curDot'), ring=document.getElementById('curRing'), label=document.getElementById('curLabel');
+      var mx=innerWidth/2,my=innerHeight/2, rx=mx,ry=my;
+      window.addEventListener('mousemove',function(e){
+        mx=e.clientX;my=e.clientY;
+        dot.style.left=mx+'px';dot.style.top=my+'px';
+        label.style.left=mx+'px';label.style.top=(my-38)+'px';
+        dot.style.opacity=1;ring.style.opacity=1;
+      });
+      (function loop(){ rx+=(mx-rx)*0.18; ry+=(my-ry)*0.18; ring.style.left=rx+'px'; ring.style.top=ry+'px'; requestAnimationFrame(loop); })();
+      document.addEventListener('mouseleave',function(){dot.style.opacity=0;ring.style.opacity=0;});
+
+      var hoverSel='a, button, .btn';
+      document.querySelectorAll(hoverSel).forEach(function(el){
+        el.addEventListener('mouseenter',function(){ ring.classList.add('grow'); });
+        el.addEventListener('mouseleave',function(){ ring.classList.remove('grow'); label.classList.remove('show'); });
+      });
+      document.querySelectorAll('[data-cursor]').forEach(function(el){
+        el.addEventListener('mouseenter',function(){ label.textContent=el.getAttribute('data-cursor'); label.classList.add('show'); });
+        el.addEventListener('mouseleave',function(){ label.classList.remove('show'); });
+      });
+
+      /* Magnetic buttons */
+      document.querySelectorAll('.btn-primary, .nav-cta').forEach(function(el){
+        el.classList.add('magnetic');
+        el.addEventListener('mousemove',function(e){
+          var r=el.getBoundingClientRect();
+          var x=e.clientX-(r.left+r.width/2), y=e.clientY-(r.top+r.height/2);
+          el.style.transform='translate('+x*0.28+'px,'+y*0.4+'px)';
+        });
+        el.addEventListener('mouseleave',function(){ el.style.transform=''; });
+      });
+
+      /* Card spotlight */
+      document.querySelectorAll('.project, .skill-card, .lesson').forEach(function(card){
+        card.classList.add('spot');
+        card.addEventListener('mouseenter',function(){ card.classList.add('lit'); });
+        card.addEventListener('mousemove',function(e){
+          var r=card.getBoundingClientRect();
+          card.style.setProperty('--mx',(e.clientX-r.left)+'px');
+          card.style.setProperty('--my',(e.clientY-r.top)+'px');
+        });
+        card.addEventListener('mouseleave',function(){ card.classList.remove('lit'); });
+      });
+
+      /* Hero parallax */
+      if(!reduce){
+        var hero=document.querySelector('.hero');
+        var hbg=document.querySelector('.hero-bg'), hpanel=document.querySelector('.panel');
+        if(hero){
+          hero.addEventListener('mousemove',function(e){
+            var r=hero.getBoundingClientRect();
+            var cx=(e.clientX-r.left)/r.width-0.5, cy=(e.clientY-r.top)/r.height-0.5;
+            if(hbg) hbg.style.transform='translate('+cx*18+'px,'+cy*14+'px)';
+            if(hpanel) hpanel.style.transform='translate('+cx*-12+'px,'+cy*-9+'px)';
+          });
+          hero.addEventListener('mouseleave',function(){
+            if(hbg) hbg.style.transform=''; if(hpanel) hpanel.style.transform='';
+          });
+        }
+      }
+    }
+  })();
+
 </script>
 </body>
 </html>
