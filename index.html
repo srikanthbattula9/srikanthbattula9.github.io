@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Srikanth — Entry-Level Data Engineer</title>
+<meta name="description" content="Srikanth — entry-level data engineer building hands-on data pipeline projects with SQL, Python, PostgreSQL, FastAPI, and real-world datasets." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;450;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --paper:#F5F6F8;
+    --surface:#FFFFFF;
+    --surface-2:#FBFCFD;
+    --ink:#101A2B;
+    --ink-2:#3C4758;
+    --ink-3:#6B7686;
+    --line:#E4E8EE;
+    --line-strong:#CFD6DF;
+    --accent:#0C6E5D;
+    --accent-deep:#084F43;
+    --accent-soft:#E7F2EF;
+    --amber:#B45309;
+    --amber-soft:#FBEEE0;
+    --shadow-sm:0 1px 2px rgba(16,26,43,.05), 0 1px 1px rgba(16,26,43,.04);
+    --shadow-md:0 10px 30px -12px rgba(16,26,43,.16), 0 2px 6px rgba(16,26,43,.05);
+    --radius:14px;
+    --maxw:1120px;
+    --display:"Space Grotesk", system-ui, sans-serif;
+    --body:"Inter", system-ui, sans-serif;
+    --mono:"JetBrains Mono", ui-monospace, monospace;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--body);
+    font-size:16px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+  }
+  a{color:inherit;text-decoration:none;}
+  h1,h2,h3,h4{font-family:var(--display);margin:0;line-height:1.1;letter-spacing:-.01em;font-weight:600;}
+  p{margin:0;}
+
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px;}
+
+  .eyebrow{
+    font-family:var(--mono);
+    font-size:12px;
+    letter-spacing:.16em;
+    text-transform:uppercase;
+    color:var(--accent);
+    font-weight:500;
+    display:inline-flex;
+    align-items:center;
+    gap:9px;
+  }
+  .eyebrow::before{
+    content:"";
+    width:22px;height:1px;background:var(--accent);opacity:.5;display:inline-block;
+  }
+
+  /* ---------- Nav ---------- */
+  header.nav{
+    position:sticky;top:0;z-index:60;
+    background:rgba(245,246,248,.82);
+    backdrop-filter:saturate(180%) blur(12px);
+    border-bottom:1px solid transparent;
+    transition:border-color .3s ease, background .3s ease;
+  }
+  header.nav.scrolled{border-bottom-color:var(--line);}
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;height:66px;}
+  .brand{display:flex;align-items:center;gap:11px;font-family:var(--display);font-weight:600;font-size:16px;letter-spacing:-.01em;}
+  .brand .mark{
+    width:30px;height:30px;border-radius:8px;
+    background:var(--ink);
+    display:grid;place-items:center;
+    position:relative;flex:none;
+  }
+  .brand .mark span{
+    width:11px;height:11px;border-radius:3px;
+    border:1.8px solid var(--accent);
+    display:block;
+    position:relative;
+  }
+  .brand .mark span::after{
+    content:"";position:absolute;inset:-7px -14px;
+  }
+  .nav-links{display:flex;align-items:center;gap:4px;}
+  .nav-links a{
+    font-size:13.5px;color:var(--ink-2);padding:8px 12px;border-radius:8px;font-weight:450;
+    transition:color .18s ease, background .18s ease;
+  }
+  .nav-links a:hover{color:var(--ink);background:rgba(16,26,43,.045);}
+  .nav-links a.active{color:var(--accent);}
+  .nav-cta{
+    margin-left:8px;font-family:var(--mono);font-size:12.5px;font-weight:500;
+    padding:9px 15px;border-radius:9px;background:var(--ink);color:#fff;
+    transition:transform .18s ease, background .18s ease;
+    letter-spacing:.01em;
+  }
+  .nav-cta:hover{background:var(--accent-deep);transform:translateY(-1px);}
+  .menu-btn{display:none;background:none;border:1px solid var(--line-strong);border-radius:9px;width:40px;height:40px;cursor:pointer;color:var(--ink);}
+  .menu-btn svg{width:20px;height:20px;}
+
+  /* ---------- Hero ---------- */
+  .hero{padding:82px 0 70px;position:relative;overflow:hidden;}
+  .hero-grid{display:grid;grid-template-columns:1.15fr .95fr;gap:56px;align-items:center;}
+  .hero .name{
+    font-size:clamp(44px,7vw,74px);
+    font-weight:700;
+    letter-spacing:-.03em;
+    line-height:.98;
+    margin:18px 0 0;
+  }
+  .hero .role{
+    font-family:var(--mono);
+    font-size:clamp(15px,2.4vw,19px);
+    color:var(--accent);
+    font-weight:500;
+    margin-top:14px;
+    letter-spacing:.01em;
+  }
+  .hero .sub{
+    font-size:clamp(17px,2.2vw,19px);
+    color:var(--ink-2);
+    margin-top:22px;
+    max-width:46ch;
+    line-height:1.55;
+  }
+  .hero .intro{color:var(--ink-3);margin-top:16px;max-width:48ch;font-size:15.5px;}
+  .hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px;}
+  .btn{
+    display:inline-flex;align-items:center;gap:9px;
+    font-family:var(--mono);font-size:13px;font-weight:500;letter-spacing:.01em;
+    padding:12px 18px;border-radius:10px;cursor:pointer;
+    transition:transform .18s ease, background .18s ease, border-color .18s ease, color .18s ease;
+    border:1px solid transparent;
+  }
+  .btn svg{width:15px;height:15px;}
+  .btn-primary{background:var(--accent);color:#fff;}
+  .btn-primary:hover{background:var(--accent-deep);transform:translateY(-2px);}
+  .btn-ghost{background:var(--surface);color:var(--ink);border-color:var(--line-strong);}
+  .btn-ghost:hover{border-color:var(--ink-3);transform:translateY(-2px);}
+
+  /* Hero pipeline panel (signature element) */
+  .panel{
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-radius:18px;
+    box-shadow:var(--shadow-md);
+    padding:22px;
+    position:relative;
+  }
+  .panel-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;}
+  .panel-head .label{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);}
+  .dot-live{display:inline-flex;align-items:center;gap:7px;font-family:var(--mono);font-size:11px;color:var(--accent);}
+  .dot-live i{width:7px;height:7px;border-radius:50%;background:var(--accent);display:inline-block;box-shadow:0 0 0 0 rgba(12,110,93,.5);animation:pulse 2.4s infinite;}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(12,110,93,.45);}70%{box-shadow:0 0 0 8px rgba(12,110,93,0);}100%{box-shadow:0 0 0 0 rgba(12,110,93,0);}}
+
+  .flow{display:flex;flex-direction:column;gap:0;position:relative;}
+  .flow-node{
+    display:flex;align-items:center;gap:14px;
+    padding:13px 15px;border-radius:11px;
+    background:var(--surface-2);
+    border:1px solid var(--line);
+    position:relative;z-index:2;
+  }
+  .flow-node .n-ico{
+    width:34px;height:34px;border-radius:9px;flex:none;
+    display:grid;place-items:center;background:var(--accent-soft);color:var(--accent-deep);
+  }
+  .flow-node .n-ico svg{width:17px;height:17px;}
+  .flow-node .n-txt b{font-family:var(--mono);font-size:13px;font-weight:600;display:block;letter-spacing:.01em;}
+  .flow-node .n-txt small{color:var(--ink-3);font-size:12px;}
+  .flow-node.future{border-style:dashed;background:transparent;}
+  .flow-node.future .n-ico{background:var(--amber-soft);color:var(--amber);}
+  .flow-connector{height:16px;width:2px;background:linear-gradient(var(--line-strong),var(--line-strong));margin-left:31px;position:relative;}
+  .flow-connector::after{
+    content:"";position:absolute;left:-3px;top:0;width:8px;height:8px;border-radius:50%;
+    background:var(--accent);
+    animation:travel 3.4s linear infinite;
+  }
+  @keyframes travel{0%{top:-2px;opacity:0;}12%{opacity:1;}88%{opacity:1;}100%{top:14px;opacity:0;}}
+  .panel-foot{margin-top:18px;font-family:var(--mono);font-size:11.5px;color:var(--ink-3);border-top:1px dashed var(--line);padding-top:14px;line-height:1.5;}
+  .panel-foot b{color:var(--accent-deep);}
+
+  /* ---------- Section scaffolding ---------- */
+  section{padding:76px 0;}
+  .sec-head{max-width:60ch;margin-bottom:44px;}
+  .sec-head h2{font-size:clamp(28px,4vw,40px);margin-top:16px;letter-spacing:-.02em;}
+  .sec-head p{color:var(--ink-2);margin-top:16px;font-size:16.5px;}
+
+  /* ---------- About ---------- */
+  .about{background:var(--surface);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:52px;align-items:start;}
+  .about-body p{color:var(--ink-2);margin-bottom:16px;font-size:16px;line-height:1.68;}
+  .about-body p strong{color:var(--ink);font-weight:600;}
+  .about-side{
+    background:var(--surface-2);border:1px solid var(--line);border-radius:var(--radius);
+    padding:26px;position:sticky;top:90px;
+  }
+  .about-side h4{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);margin-bottom:18px;}
+  .fact{display:flex;gap:13px;padding:13px 0;border-bottom:1px solid var(--line);}
+  .fact:last-child{border-bottom:none;}
+  .fact .f-ico{width:20px;height:20px;flex:none;color:var(--accent);margin-top:2px;}
+  .fact .f-ico svg{width:20px;height:20px;}
+  .fact b{display:block;font-size:14.5px;font-weight:600;}
+  .fact small{color:var(--ink-3);font-size:13px;}
+  .open-to{margin-top:22px;}
+  .open-to .lbl{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);margin-bottom:11px;display:block;}
+  .chips{display:flex;flex-wrap:wrap;gap:7px;}
+  .chip{font-family:var(--mono);font-size:12px;padding:6px 11px;border-radius:7px;background:var(--accent-soft);color:var(--accent-deep);border:1px solid rgba(12,110,93,.16);font-weight:500;}
+
+  /* ---------- Skills ---------- */
+  .skills-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+  .skill-card{
+    background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+    padding:22px 22px 24px;transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+  }
+  .skill-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-md);border-color:var(--line-strong);}
+  .skill-card .sc-head{display:flex;align-items:center;gap:11px;margin-bottom:16px;}
+  .skill-card .sc-ico{width:32px;height:32px;border-radius:8px;background:var(--accent-soft);color:var(--accent-deep);display:grid;place-items:center;flex:none;}
+  .skill-card .sc-ico svg{width:17px;height:17px;}
+  .skill-card h4{font-size:15px;font-family:var(--display);font-weight:600;}
+  .skill-list{display:flex;flex-wrap:wrap;gap:7px;}
+  .skill-list span{font-family:var(--mono);font-size:12.5px;color:var(--ink-2);background:var(--surface-2);border:1px solid var(--line);padding:5px 10px;border-radius:7px;}
+  .skill-card.learning .sc-ico{background:var(--amber-soft);color:var(--amber);}
+  .skill-card.learning .skill-list span{border-style:dashed;color:var(--ink-3);}
+  .learning-tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--amber);margin-left:auto;background:var(--amber-soft);padding:3px 8px;border-radius:6px;}
+
+  /* ---------- Projects ---------- */
+  .projects{background:var(--surface);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .project{
+    border:1px solid var(--line);border-radius:20px;background:var(--surface-2);
+    overflow:hidden;margin-bottom:30px;
+  }
+  .project-top{display:grid;grid-template-columns:1.25fr 1fr;}
+  .project-main{padding:34px 34px 30px;}
+  .p-index{font-family:var(--mono);font-size:12px;color:var(--ink-3);letter-spacing:.1em;}
+  .p-titlerow{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin:8px 0 4px;}
+  .project h3{font-size:clamp(23px,3vw,30px);letter-spacing:-.02em;}
+  .status{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;padding:5px 11px;border-radius:20px;display:inline-flex;align-items:center;gap:7px;}
+  .status i{width:7px;height:7px;border-radius:50%;display:inline-block;}
+  .status.building{background:var(--accent-soft);color:var(--accent-deep);}
+  .status.building i{background:var(--accent);animation:pulse 2.4s infinite;}
+  .status.design{background:var(--amber-soft);color:var(--amber);}
+  .status.design i{background:var(--amber);}
+  .p-kind{font-family:var(--mono);font-size:12px;color:var(--ink-3);margin-top:6px;}
+  .p-desc{color:var(--ink-2);margin-top:18px;font-size:15.5px;line-height:1.65;max-width:60ch;}
+  .p-block{margin-top:22px;}
+  .p-block .bl{font-family:var(--mono);font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-3);margin-bottom:11px;display:flex;align-items:center;gap:8px;}
+  .p-block .bl::before{content:"";width:14px;height:1px;background:var(--line-strong);}
+  .p-list{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:1fr 1fr;gap:8px 20px;}
+  .p-list li{font-size:14px;color:var(--ink-2);display:flex;gap:9px;align-items:flex-start;line-height:1.45;}
+  .p-list li svg{width:15px;height:15px;flex:none;margin-top:3px;color:var(--accent);}
+  .p-list.planned li svg{color:var(--amber);}
+  .p-stack{display:flex;flex-wrap:wrap;gap:7px;margin-top:22px;}
+  .p-stack span{font-family:var(--mono);font-size:12px;padding:5px 11px;border-radius:7px;background:var(--surface);border:1px solid var(--line-strong);color:var(--ink-2);}
+  .p-actions{display:flex;gap:11px;margin-top:26px;flex-wrap:wrap;}
+
+  .project-side{background:var(--surface);border-left:1px solid var(--line);padding:30px 28px;}
+  .arch-label{font-family:var(--mono);font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-3);margin-bottom:18px;}
+  .arch{display:flex;flex-direction:column;gap:0;}
+  .arch-stage{display:flex;align-items:center;gap:12px;padding:11px 13px;border-radius:10px;background:var(--surface-2);border:1px solid var(--line);}
+  .arch-stage .as-num{font-family:var(--mono);font-size:11px;color:var(--accent);font-weight:600;width:18px;flex:none;}
+  .arch-stage .as-txt b{font-family:var(--mono);font-size:12.5px;font-weight:600;display:block;}
+  .arch-stage .as-txt small{font-size:11.5px;color:var(--ink-3);}
+  .arch-stage.future{border-style:dashed;background:transparent;}
+  .arch-stage.future .as-num{color:var(--amber);}
+  .arch-link{height:14px;width:2px;background:var(--line-strong);margin-left:22px;}
+
+  /* ---------- Learning journey ---------- */
+  .journey-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;}
+  .lesson{
+    background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:22px 22px 20px;
+    position:relative;transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+  }
+  .lesson:hover{transform:translateY(-3px);box-shadow:var(--shadow-md);border-color:var(--line-strong);}
+  .lesson .day{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);font-weight:600;}
+  .lesson h4{font-size:16px;margin:11px 0 8px;font-family:var(--display);font-weight:600;letter-spacing:-.01em;}
+  .lesson p{color:var(--ink-2);font-size:14px;line-height:1.6;}
+  .lesson .takeaway{margin-top:14px;font-family:var(--mono);font-size:12px;color:var(--ink-3);border-top:1px dashed var(--line);padding-top:12px;line-height:1.55;}
+  .lesson .takeaway b{color:var(--accent-deep);font-weight:600;}
+
+  /* ---------- Resume ---------- */
+  .resume{background:var(--surface);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .resume-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:48px;align-items:start;}
+  .resume-card{background:var(--surface-2);border:1px solid var(--line);border-radius:var(--radius);padding:28px;}
+  .resume-card .rc-title{font-family:var(--mono);font-size:13px;color:var(--accent);letter-spacing:.02em;margin-bottom:14px;}
+  .resume-card p{color:var(--ink-2);font-size:15px;line-height:1.65;}
+  .resume-rows{margin-top:6px;}
+  .rrow{padding:16px 0;border-bottom:1px solid var(--line);}
+  .rrow:last-child{border-bottom:none;}
+  .rrow .rk{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);margin-bottom:7px;}
+  .rrow .rv{color:var(--ink-2);font-size:14.5px;line-height:1.55;}
+  .rrow .rv b{color:var(--ink);}
+
+  /* ---------- Contact / footer ---------- */
+  .contact{padding:88px 0;text-align:center;}
+  .contact h2{font-size:clamp(30px,5vw,48px);letter-spacing:-.025em;max-width:16ch;margin:16px auto 0;}
+  .contact p{color:var(--ink-2);margin:18px auto 0;max-width:52ch;font-size:16.5px;}
+  .contact-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:34px;}
+  footer{border-top:1px solid var(--line);padding:30px 0;}
+  .foot-inner{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px;}
+  .foot-inner .fl{font-family:var(--mono);font-size:12.5px;color:var(--ink-3);}
+  .foot-links{display:flex;gap:18px;}
+  .foot-links a{font-family:var(--mono);font-size:12.5px;color:var(--ink-2);transition:color .18s ease;}
+  .foot-links a:hover{color:var(--accent);}
+
+  /* ---------- Reveal animation ---------- */
+  .reveal{opacity:0;transform:translateY(18px);transition:opacity .7s cubic-bezier(.22,.61,.36,1), transform .7s cubic-bezier(.22,.61,.36,1);}
+  .reveal.in{opacity:1;transform:none;}
+
+  /* ---------- Responsive ---------- */
+  @media (max-width:940px){
+    .hero-grid{grid-template-columns:1fr;gap:44px;}
+    .about-grid{grid-template-columns:1fr;gap:34px;}
+    .about-side{position:static;}
+    .skills-grid{grid-template-columns:repeat(2,1fr);}
+    .project-top{grid-template-columns:1fr;}
+    .project-side{border-left:none;border-top:1px solid var(--line);}
+    .journey-grid{grid-template-columns:1fr;}
+    .resume-grid{grid-template-columns:1fr;gap:30px;}
+  }
+  @media (max-width:640px){
+    .wrap{padding:0 20px;}
+    .nav-links{
+      position:fixed;inset:66px 0 auto 0;background:var(--paper);
+      flex-direction:column;align-items:stretch;gap:2px;padding:14px 20px 22px;
+      border-bottom:1px solid var(--line);box-shadow:var(--shadow-md);
+      transform:translateY(-8px);opacity:0;pointer-events:none;transition:.22s ease;
+    }
+    .nav-links.open{transform:none;opacity:1;pointer-events:auto;}
+    .nav-links a{padding:12px 12px;font-size:15px;}
+    .nav-cta{margin:8px 0 0;text-align:center;}
+    .menu-btn{display:grid;place-items:center;}
+    .skills-grid{grid-template-columns:1fr;}
+    .p-list{grid-template-columns:1fr;}
+    .project-main{padding:26px 22px;}
+    section{padding:58px 0;}
+    .hero{padding:56px 0 50px;}
+  }
+
+  @media (prefers-reduced-motion:reduce){
+    *{animation:none !important;transition:none !important;scroll-behavior:auto;}
+    .reveal{opacity:1;transform:none;}
+  }
+  :focus-visible{outline:2.5px solid var(--accent);outline-offset:3px;border-radius:6px;}
+</style>
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<header class="nav" id="nav">
+  <div class="wrap nav-inner">
+    <a href="#top" class="brand" aria-label="Srikanth home">
+      <span class="mark"><span></span></span>
+      Srikanth
+    </a>
+    <nav class="nav-links" id="navLinks">
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#journey">Learning</a>
+      <a href="#resume">Resume</a>
+      <a href="#contact" class="nav-cta">Contact</a>
+    </nav>
+    <button class="menu-btn" id="menuBtn" aria-label="Toggle menu" aria-expanded="false">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
+    </button>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div class="hero-copy reveal">
+      <span class="eyebrow">Entry-Level Data Engineer</span>
+      <h1 class="name">Srikanth</h1>
+      <div class="role">SQL · Python · PostgreSQL · FastAPI</div>
+      <p class="sub">Building hands-on data engineering projects with SQL, Python, PostgreSQL, FastAPI, and cloud-ready pipeline design.</p>
+      <p class="intro">I'm focused on becoming job-ready for data engineering internships and junior data roles by building real projects, improving my fundamentals, and documenting my progress.</p>
+      <div class="hero-actions">
+        <a href="#projects" class="btn btn-primary">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg>
+          View projects
+        </a>
+        <a href="https://github.com/srikanthbattula9" target="_blank" rel="noopener" class="btn btn-ghost">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.2.8-.5v-2c-3.2.7-3.9-1.4-3.9-1.4-.5-1.3-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.7 1.3 3.4 1 .1-.8.4-1.3.8-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.4-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.2 1.2a11 11 0 0 1 5.8 0C17.3 5 18.3 5.3 18.3 5.3c.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .3.2.6.8.5 4.6-1.5 7.9-5.8 7.9-10.9C23.5 5.7 18.3.5 12 .5Z"/></svg>
+          GitHub
+        </a>
+        <a href="https://linkedin.com/in/srikanth-b-094646421" target="_blank" rel="noopener" class="btn btn-ghost">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.26 2.37 4.26 5.45v6.29ZM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12ZM7.12 20.45H3.56V9h3.56v11.45ZM22.22 0H1.77C.8 0 0 .78 0 1.74v20.52C0 23.22.8 24 1.77 24h20.45c.98 0 1.78-.78 1.78-1.74V1.74C24 .78 23.2 0 22.22 0Z"/></svg>
+          LinkedIn
+        </a>
+      </div>
+    </div>
+
+    <!-- Signature pipeline panel -->
+    <div class="reveal">
+      <div class="panel" role="img" aria-label="Illustration of a data pipeline: raw ingestion, validation, PostgreSQL storage, then future OCR and translation stages">
+        <div class="panel-head">
+          <span class="label">// mental model</span>
+          <span class="dot-live"><i></i>raw &rarr; processed</span>
+        </div>
+        <div class="flow">
+          <div class="flow-node">
+            <span class="n-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6c0-1.1 3.6-2 8-2s8 .9 8 2-3.6 2-8 2-8-.9-8-2Z"/><path d="M4 6v12c0 1.1 3.6 2 8 2s8-.9 8-2V6"/></svg></span>
+            <span class="n-txt"><b>ingest</b><small>store what the system received</small></span>
+          </div>
+          <div class="flow-connector"></div>
+          <div class="flow-node">
+            <span class="n-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg></span>
+            <span class="n-txt"><b>validate</b><small>schemas, duplicates, constraints</small></span>
+          </div>
+          <div class="flow-connector"></div>
+          <div class="flow-node">
+            <span class="n-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 1.7 3.6 3 8 3s8-1.3 8-3V5"/><path d="M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/></svg></span>
+            <span class="n-txt"><b>store</b><small>PostgreSQL, raw + processed</small></span>
+          </div>
+          <div class="flow-connector"></div>
+          <div class="flow-node future">
+            <span class="n-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M2 12h4M18 12h4M4.9 19.1l2.8-2.8M16.3 7.7l2.8-2.8"/></svg></span>
+            <span class="n-txt"><b>process</b><small>OCR, translation — planned</small></span>
+          </div>
+        </div>
+        <div class="panel-foot">
+          The idea I keep coming back to: <b>raw data is what a system received; processed data is what it understood.</b> Keeping them separate is what makes reprocessing, analytics, and future models possible.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ABOUT ============ -->
+<section class="about" id="about">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">About</span>
+      <h2>Early in my career, and serious about the work.</h2>
+    </div>
+    <div class="about-grid">
+      <div class="about-body reveal">
+        <p>I'm an entry-level data engineering candidate based in <strong>Rockville, Maryland</strong>, with a Master's in Information Technology from Wilmington University.</p>
+        <p>My current focus is building strong foundations in SQL, Python, PostgreSQL, data modeling, backend APIs, ETL concepts, and data pipeline design. Since I'm early in my career, I'm using hands-on projects to build real proof of skill instead of only relying on tutorials.</p>
+        <p>I'm currently building a portfolio around production-style data systems — including event-driven ingestion, API development, database design, validation, duplicate handling, analytics, and future cloud deployment.</p>
+        <p>I'm open to Data Engineering Intern, Junior Data Engineer, ETL, Data Analyst, and Analytics Engineering opportunities where I can contribute, learn quickly, and grow.</p>
+      </div>
+      <aside class="about-side reveal">
+        <h4>At a glance</h4>
+        <div class="fact">
+          <span class="f-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-5.6-7-11a7 7 0 0 1 14 0c0 5.4-7 11-7 11Z"/><circle cx="12" cy="10" r="2.5"/></svg></span>
+          <div><b>Rockville, Maryland</b><small>Open to remote &amp; DC / MD / VA area</small></div>
+        </div>
+        <div class="fact">
+          <span class="f-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10 12 5 2 10l10 5 10-5Z"/><path d="M6 12v5c0 1 2.7 2.5 6 2.5s6-1.5 6-2.5v-5"/></svg></span>
+          <div><b>M.S. Information Technology</b><small>Wilmington University · Graduated May 2025</small></div>
+        </div>
+        <div class="fact">
+          <span class="f-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 17l6-6-6-6"/><path d="M12 19h8"/></svg></span>
+          <div><b>Building in public</b><small>Documenting progress project by project</small></div>
+        </div>
+        <div class="open-to">
+          <span class="lbl">Open to</span>
+          <div class="chips">
+            <span class="chip">Data Engineering Intern</span>
+            <span class="chip">Junior Data Engineer</span>
+            <span class="chip">ETL Developer</span>
+            <span class="chip">Analytics Engineer</span>
+            <span class="chip">Data Analyst</span>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SKILLS ============ -->
+<section id="skills">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Skills</span>
+      <h2>What I work with — and what I'm learning next.</h2>
+      <p>Grouped honestly: the tools I'm actively building with, and the stack I'm currently learning toward.</p>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-card reveal">
+        <div class="sc-head"><span class="sc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="8 6 3 12 8 18"/><polyline points="16 6 21 12 16 18"/></svg></span><h4>Programming &amp; Querying</h4></div>
+        <div class="skill-list"><span>SQL</span><span>Python</span></div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="sc-head"><span class="sc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="6" rx="8" ry="3"/><path d="M4 6v12c0 1.7 3.6 3 8 3s8-1.3 8-3V6"/><path d="M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/></svg></span><h4>Databases &amp; Modeling</h4></div>
+        <div class="skill-list"><span>PostgreSQL</span><span>Relational Design</span><span>Data Modeling</span><span>Indexes</span><span>Constraints</span><span>Data Validation</span></div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="sc-head"><span class="sc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v6H4zM4 14h16v6H4z"/><path d="M8 7h.01M8 17h.01"/></svg></span><h4>Backend &amp; APIs</h4></div>
+        <div class="skill-list"><span>FastAPI</span><span>REST APIs</span><span>SQLAlchemy</span><span>Pydantic</span><span>Env Config</span></div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="sc-head"><span class="sc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l3-8 4 16 3-8h4"/></svg></span><h4>Data Engineering Concepts</h4></div>
+        <div class="skill-list"><span>ETL / ELT</span><span>Data Ingestion</span><span>Data Quality</span><span>Deduplication</span><span>Raw vs Processed</span><span>Event-Driven</span><span>Batch Processing</span></div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="sc-head"><span class="sc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M6 9v6"/><path d="M18 6a9 9 0 0 1-9 9"/><circle cx="18" cy="6" r="3"/></svg></span><h4>Tools</h4></div>
+        <div class="skill-list"><span>Git</span><span>GitHub</span><span>VS Code</span><span>Postman / Swagger</span><span>Command Line</span></div>
+      </div>
+      <div class="skill-card learning reveal">
+        <div class="sc-head"><span class="sc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v3M12 18v3M5 12H2M22 12h-3M6 6l-2-2M18 6l2-2"/><circle cx="12" cy="12" r="4"/></svg></span><h4>Learning Next</h4><span class="learning-tag">Currently learning</span></div>
+        <div class="skill-list"><span>Docker</span><span>Cloud Deployment</span><span>Airflow</span><span>dbt</span><span>Snowflake / BigQuery</span><span>Azure / AWS</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROJECTS ============ -->
+<section class="projects" id="projects">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Projects</span>
+      <h2>Three projects, one theme: intelligent transportation &amp; data.</h2>
+      <p>A flagship pipeline being built now, plus two larger data platforms in design. I'm building them one at a time rather than all at once — starting with a defensible MVP.</p>
+    </div>
+
+    <!-- PROJECT 1 -->
+    <article class="project reveal">
+      <div class="project-top">
+        <div class="project-main">
+          <span class="p-index">01 / flagship</span>
+          <div class="p-titlerow">
+            <h3>DriveLingo AI</h3>
+            <span class="status building"><i></i>In progress · building</span>
+          </div>
+          <div class="p-kind">Traffic Sign Intelligence · Event-Driven Backend Pipeline</div>
+          <p class="p-desc">A traffic sign intelligence pipeline that processes traffic sign images and metadata through raw ingestion, validation, PostgreSQL storage, and duplicate handling — designed so future OCR, translation, and driver-alert workflows can build on the same foundation. The database separates raw ingestion events from processed records, so data can be reprocessed later with better models.</p>
+
+          <div class="p-block">
+            <span class="bl">What I've built</span>
+            <ul class="p-list">
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>FastAPI backend with GET / POST endpoints</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>PostgreSQL + SQLAlchemy models</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Pydantic schema validation</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>404 + 409 duplicate handling</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Unique index + IntegrityError rollback</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>.env-based config &amp; raw ingestion table</li>
+            </ul>
+          </div>
+
+          <div class="p-block">
+            <span class="bl">What I learned</span>
+            <p class="p-desc" style="margin-top:0;">Duplicate protection can't live only in the API — the database has to enforce it too, with constraints and unique indexes as the final safety layer. Separating raw ingestion from processed records is what keeps a pipeline reprocessable instead of locked to one model.</p>
+          </div>
+
+          <div class="p-block">
+            <span class="bl">Planned next</span>
+            <ul class="p-list planned">
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Image upload endpoint</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>OCR + language detection</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Translation + driver alerts</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Docker + cloud deployment</li>
+            </ul>
+          </div>
+
+          <div class="p-stack">
+            <span>Python</span><span>FastAPI</span><span>PostgreSQL</span><span>SQLAlchemy</span><span>Pydantic</span><span>SQL</span><span>Git</span>
+          </div>
+          <div class="p-actions">
+            <a href="https://github.com/srikanthbattula9" target="_blank" rel="noopener" class="btn btn-primary">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.2.8-.5v-2c-3.2.7-3.9-1.4-3.9-1.4-.5-1.3-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.7 1.3 3.4 1 .1-.8.4-1.3.8-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.4-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.2 1.2a11 11 0 0 1 5.8 0C17.3 5 18.3 5.3 18.3 5.3c.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .3.2.6.8.5 4.6-1.5 7.9-5.8 7.9-10.9C23.5 5.7 18.3.5 12 .5Z"/></svg>
+              View repo
+            </a>
+          </div>
+        </div>
+        <div class="project-side">
+          <div class="arch-label">// pipeline</div>
+          <div class="arch">
+            <div class="arch-stage"><span class="as-num">01</span><span class="as-txt"><b>traffic_sign_events</b><small>raw ingestion table</small></span></div>
+            <div class="arch-link"></div>
+            <div class="arch-stage"><span class="as-num">02</span><span class="as-txt"><b>validate</b><small>Pydantic + duplicate checks</small></span></div>
+            <div class="arch-link"></div>
+            <div class="arch-stage"><span class="as-num">03</span><span class="as-txt"><b>PostgreSQL</b><small>constraints + unique index</small></span></div>
+            <div class="arch-link"></div>
+            <div class="arch-stage future"><span class="as-num">04</span><span class="as-txt"><b>OCR / translate</b><small>planned</small></span></div>
+            <div class="arch-link"></div>
+            <div class="arch-stage future"><span class="as-num">05</span><span class="as-txt"><b>driver alerts</b><small>planned</small></span></div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- PROJECT 2 -->
+    <article class="project reveal">
+      <div class="project-top">
+        <div class="project-main">
+          <span class="p-index">02 / data platform</span>
+          <div class="p-titlerow">
+            <h3>UrbanFlow Data Platform</h3>
+            <span class="status design"><i></i>In design · planned</span>
+          </div>
+          <div class="p-kind">City Mobility &amp; Traffic Analytics · Batch + Analytics Pipeline</div>
+          <p class="p-desc">A city mobility data platform that ingests traffic, transit, weather, and incident datasets to analyze congestion patterns, travel delays, and road safety trends. The plan is a pipeline that cleans, validates, and transforms public urban data in PostgreSQL, keeping raw source data separate from analytics-ready reporting tables.</p>
+
+          <div class="p-block">
+            <span class="bl">Planned scope</span>
+            <ul class="p-list planned">
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Ingest public CSV / API datasets</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Separate raw &amp; cleaned tables</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Validate timestamps &amp; location fields</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Analytics-ready warehouse schema</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>SQL congestion &amp; incident analysis</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Dashboard-ready summary tables</li>
+            </ul>
+          </div>
+
+          <div class="p-block">
+            <span class="bl">Questions it will answer</span>
+            <p class="p-desc" style="margin-top:0;">Which locations see the most incidents, what times of day have the worst congestion, how weather affects delays, and how weekday and weekend traffic patterns differ — using public datasets like NYC / DC / Maryland open traffic and collision data plus historical weather.</p>
+          </div>
+
+          <div class="p-stack">
+            <span>Python</span><span>SQL</span><span>PostgreSQL</span><span>Pandas</span><span>FastAPI (optional)</span><span>Power BI / Tableau (optional)</span><span>Git</span>
+          </div>
+          <div class="p-actions">
+            <a href="https://github.com/srikanthbattula9" target="_blank" rel="noopener" class="btn btn-ghost">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.2.8-.5v-2c-3.2.7-3.9-1.4-3.9-1.4-.5-1.3-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.7 1.3 3.4 1 .1-.8.4-1.3.8-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.4-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.2 1.2a11 11 0 0 1 5.8 0C17.3 5 18.3 5.3 18.3 5.3c.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .3.2.6.8.5 4.6-1.5 7.9-5.8 7.9-10.9C23.5 5.7 18.3.5 12 .5Z"/></svg>
+              Repo coming soon
+            </a>
+          </div>
+        </div>
+        <div class="project-side">
+          <div class="arch-label">// pipeline</div>
+          <div class="arch">
+            <div class="arch-stage"><span class="as-num">01</span><span class="as-txt"><b>public datasets</b><small>traffic · transit · weather · incidents</small></span></div>
+            <div class="arch-link"></div>
+            <div class="arch-stage"><span class="as-num">02</span><span class="as-txt"><b>Python ingest</b><small>raw PostgreSQL tables</small></span></div>
+            <div class="arch-link"></div>
+            <div class="arch-stage"><span class="as-num">03</span><span class="as-txt"><b>clean + validate</b><small>quality checks</small></span></div>
+            <div class="arch-link"></div>
+            <div class="arch-stage"><span class="as-num">04</span><span class="as-txt"><b>analytics tables</b><small>reporting-ready</small></span></div>
+            <div class="arch-link"></div>
+            <div class="arch-stage"><span class="as-num">05</span><span class="as-txt"><b>SQL reports</b><small>dashboard outputs</small></span></div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- PROJECT 3 -->
+    <article class="project reveal">
+      <div class="project-top">
+        <div class="project-main">
+          <span class="p-index">03 / analytics</span>
+          <div class="p-titlerow">
+            <h3>TalentPulse</h3>
+            <span class="status design"><i></i>In design · planned</span>
+          </div>
+          <div class="p-kind">Job Market Intelligence · Data + Analytics Engineering</div>
+          <p class="p-desc">A job market intelligence pipeline that collects job postings, extracts required skills, stores structured job data in PostgreSQL, and analyzes hiring trends for data engineering and analytics roles. It's designed to show end-to-end skills — ingestion, text parsing, modeling, transformation, and SQL analytics — while producing practical, shareable insights.</p>
+
+          <div class="p-block">
+            <span class="bl">Planned scope</span>
+            <ul class="p-list planned">
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Ingest postings from open datasets</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Parse title, company, location, type</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Extract &amp; normalize skill names</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Model jobs · companies · skills · mappings</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Compare internship vs junior demand</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Weekly job-market reports</li>
+            </ul>
+          </div>
+
+          <div class="p-block">
+            <span class="bl">Why it's useful</span>
+            <p class="p-desc" style="margin-top:0;">It doubles as a research tool for my own job search — surfacing which tools (SQL, Python, Spark, Airflow, dbt, cloud) show up most in entry-level roles, and what an early-career candidate should prioritize learning. Data collection starts safely with open Kaggle-style datasets, not scraping.</p>
+          </div>
+
+          <div class="p-stack">
+            <span>Python</span><span>SQL</span><span>PostgreSQL</span><span>Pandas</span><span>Regex / basic NLP</span><span>Git</span>
+          </div>
+          <div class="p-actions">
+            <a href="https://github.com/srikanthbattula9" target="_blank" rel="noopener" class="btn btn-ghost">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.2.8-.5v-2c-3.2.7-3.9-1.4-3.9-1.4-.5-1.3-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.7 1.3 3.4 1 .1-.8.4-1.3.8-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.4-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.2 1.2a11 11 0 0 1 5.8 0C17.3 5 18.3 5.3 18.3 5.3c.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .3.2.6.8.5 4.6-1.5 7.9-5.8 7.9-10.9C23.5 5.7 18.3.5 12 .5Z"/></svg>
+              Repo coming soon
+            </a>
+          </div>
+        </div>
+        <div class="project-side">
+          <div class="arch-label">// pipeline</div>
+          <div class="arch">
+            <div class="arch-stage"><span class="as-num">01</span><span class="as-txt"><b>job postings</b><small>open datasets</small></span></div>
+            <div class="arch-link"></div>
+            <div class="arch-stage"><span class="as-num">02</span><span class="as-txt"><b>Python ingest</b><small>raw_job_postings</small></span></div>
+            <div class="arch-link"></div>
+            <div class="arch-stage"><span class="as-num">03</span><span class="as-txt"><b>extract skills</b><small>parse + normalize</small></span></div>
+            <div class="arch-link"></div>
+            <div class="arch-stage"><span class="as-num">04</span><span class="as-txt"><b>analytics model</b><small>jobs · skills · mappings</small></span></div>
+            <div class="arch-link"></div>
+            <div class="arch-stage"><span class="as-num">05</span><span class="as-txt"><b>insights</b><small>reports + trends</small></span></div>
+          </div>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ============ LEARNING JOURNEY ============ -->
+<section id="journey">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Learning journey</span>
+      <h2>Building in public, one small lesson at a time.</h2>
+      <p>A running log of what I'm learning as I build. Small lessons, but they're what turn tutorials into real understanding.</p>
+    </div>
+    <div class="journey-grid">
+      <div class="lesson reveal">
+        <span class="day">Lesson 01</span>
+        <h4>Raw vs. processed data</h4>
+        <p>In DriveLingo AI, raw traffic sign events are stored before any OCR or translation runs, so they can be reprocessed later with a better model, checked for errors, or reused for analytics.</p>
+        <div class="takeaway"><b>Raw</b> = what the system received. <b>Processed</b> = what the system understood.</div>
+      </div>
+      <div class="lesson reveal">
+        <span class="day">Lesson 02</span>
+        <h4>Git feature branches</h4>
+        <p>Instead of committing every change to main, I built the ingestion layer on its own branch. It made me understand why teams keep stable code separate from work in progress.</p>
+        <div class="takeaway"><b>main</b> = stable version. <b>feature branch</b> = safe workspace for new changes.</div>
+      </div>
+      <div class="lesson reveal">
+        <span class="day">Lesson 03</span>
+        <h4>Duplicate protection, two layers</h4>
+        <p>I added logic so the same traffic sign record can't be inserted repeatedly — and learned that this can't live only in the API. The database has to enforce it too.</p>
+        <div class="takeaway"><b>App validation</b> is useful. <b>Database constraints</b> are the final safety layer.</div>
+      </div>
+      <div class="lesson reveal">
+        <span class="day">Lesson 04</span>
+        <h4>Environment variables</h4>
+        <p>Instead of hardcoding the database URL in Python, I moved it into a .env file. Cleaner code, and much easier to move between local development and future deployment.</p>
+        <div class="takeaway">Code stays reusable. <b>Environment-specific settings</b> live outside the code.</div>
+      </div>
+      <div class="lesson reveal">
+        <span class="day">Lesson 05</span>
+        <h4>Request-based vs. event-based</h4>
+        <p>A request-based system waits for an action and returns a response. An event-based system stores what happened so different services can process it later — which is where DriveLingo is heading with camera and dashcam input.</p>
+        <div class="takeaway">The long-term goal isn't manual upload — it's a pipeline that handles <b>traffic sign events</b>.</div>
+      </div>
+      <div class="lesson reveal">
+        <span class="day">This week</span>
+        <h4>Progress check</h4>
+        <p>FastAPI backend, PostgreSQL schema design, duplicate handling, environment config, Git feature branches, and raw event ingestion. Still early, but building a real project step by step is showing me how data actually moves through a system.</p>
+        <div class="takeaway">Next focus: <b>image ingestion, OCR pipeline, and stronger SQL practice.</b></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ RESUME ============ -->
+<section class="resume" id="resume">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Resume</span>
+      <h2>The short version, on one page.</h2>
+    </div>
+    <div class="resume-grid">
+      <div class="resume-card reveal">
+        <div class="rc-title">Entry-Level Data Engineer · SQL · Python · PostgreSQL</div>
+        <p>Entry-level data engineering candidate with a Master's in Information Technology and hands-on project experience building SQL, Python, PostgreSQL, and FastAPI-based data systems. Focused on data ingestion, validation, data modeling, duplicate handling, API development, and analytics-ready database design. Seeking Data Engineering Internship, Junior Data Engineer, ETL, Analytics Engineering, or Data Analyst opportunities.</p>
+        <div class="p-actions" style="margin-top:24px;">
+          <!-- Point this href at your PDF once it's ready -->
+          <a href="#" class="btn btn-primary" id="resumeDownload">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>
+            Download résumé (PDF)
+          </a>
+        </div>
+      </div>
+      <div class="resume-rows reveal">
+        <div class="rrow">
+          <div class="rk">Skills</div>
+          <div class="rv"><b>Languages:</b> SQL, Python · <b>Databases:</b> PostgreSQL, relational design, indexes, constraints · <b>Backend:</b> FastAPI, SQLAlchemy, Pydantic, REST · <b>Data Eng:</b> ETL/ELT, ingestion, validation, deduplication, event-driven pipelines · <b>Tools:</b> Git, GitHub, VS Code, Swagger</div>
+        </div>
+        <div class="rrow">
+          <div class="rk">Currently learning</div>
+          <div class="rv">Docker · Cloud deployment · Airflow · dbt</div>
+        </div>
+        <div class="rrow">
+          <div class="rk">Education</div>
+          <div class="rv"><b>M.S. Information Technology</b> — Wilmington University, graduated May 2025</div>
+        </div>
+        <div class="rrow">
+          <div class="rk">Contact</div>
+          <div class="rv">srikanthdatadc@gmail.com · Rockville, MD · linkedin.com/in/srikanth-b-094646421 · github.com/srikanthbattula9</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section class="contact" id="contact">
+  <div class="wrap reveal">
+    <span class="eyebrow" style="justify-content:center;">Contact</span>
+    <h2>Let's talk data engineering.</h2>
+    <p>I'm open to Data Engineering Intern, Junior Data Engineer, ETL, Data Analyst, and Analytics Engineering roles — and always happy to connect and learn from people working in the field.</p>
+    <div class="contact-actions">
+      <a href="mailto:srikanthdatadc@gmail.com" class="btn btn-primary">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+        srikanthdatadc@gmail.com
+      </a>
+      <a href="https://linkedin.com/in/srikanth-b-094646421" target="_blank" rel="noopener" class="btn btn-ghost">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.26 2.37 4.26 5.45v6.29ZM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12ZM7.12 20.45H3.56V9h3.56v11.45ZM22.22 0H1.77C.8 0 0 .78 0 1.74v20.52C0 23.22.8 24 1.77 24h20.45c.98 0 1.78-.78 1.78-1.74V1.74C24 .78 23.2 0 22.22 0Z"/></svg>
+        LinkedIn
+      </a>
+      <a href="https://github.com/srikanthbattula9" target="_blank" rel="noopener" class="btn btn-ghost">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.2.8-.5v-2c-3.2.7-3.9-1.4-3.9-1.4-.5-1.3-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.7 1.3 3.4 1 .1-.8.4-1.3.8-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.4-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.2 1.2a11 11 0 0 1 5.8 0C17.3 5 18.3 5.3 18.3 5.3c.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .3.2.6.8.5 4.6-1.5 7.9-5.8 7.9-10.9C23.5 5.7 18.3.5 12 .5Z"/></svg>
+        GitHub
+      </a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap foot-inner">
+    <span class="fl">© <span id="year"></span> Srikanth · Rockville, MD</span>
+    <div class="foot-links">
+      <a href="mailto:srikanthdatadc@gmail.com">Email</a>
+      <a href="https://linkedin.com/in/srikanth-b-094646421" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://github.com/srikanthbattula9" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Year
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Nav scrolled state
+  const nav = document.getElementById('nav');
+  const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 12);
+  onScroll();
+  window.addEventListener('scroll', onScroll, {passive:true});
+
+  // Mobile menu
+  const menuBtn = document.getElementById('menuBtn');
+  const navLinks = document.getElementById('navLinks');
+  menuBtn.addEventListener('click', () => {
+    const open = navLinks.classList.toggle('open');
+    menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+
+  // Reveal on scroll
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, {threshold:0.12, rootMargin:'0px 0px -40px 0px'});
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  // Active nav link on scroll
+  const sections = ['about','skills','projects','journey','resume','contact'].map(id => document.getElementById(id));
+  const links = Array.from(navLinks.querySelectorAll('a'));
+  const spy = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting){
+        links.forEach(l => l.classList.remove('active'));
+        const active = links.find(l => l.getAttribute('href') === '#' + e.target.id);
+        if (active) active.classList.add('active');
+      }
+    });
+  }, {rootMargin:'-45% 0px -50% 0px'});
+  sections.forEach(s => s && spy.observe(s));
+
+  // Friendly reminder if resume link not yet wired up
+  document.getElementById('resumeDownload').addEventListener('click', (e) => {
+    const href = e.currentTarget.getAttribute('href');
+    if (href === '#'){ e.preventDefault(); alert('Add your résumé PDF, then point this button\'s href at the file.'); }
+  });
+</script>
+</body>
+</html>
