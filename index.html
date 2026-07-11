@@ -642,8 +642,8 @@
   <div class="wrap">
     <div class="sec-head reveal">
       <span class="eyebrow">Projects</span>
-      <h2>Three projects, one theme: intelligent transportation &amp; data.</h2>
-      <p>A flagship pipeline being built now, plus two larger data platforms in design. I'm building them one at a time rather than all at once — starting with a defensible MVP.</p>
+      <h2>Three projects, three domains — one engineering approach.</h2>
+      <p>A flagship pipeline being built now, plus two data platforms in design across city mobility and healthcare. I’m building them one at a time — starting with a defensible MVP rather than all at once.</p>
     </div>
 
     <!-- PROJECT 1 -->
@@ -772,33 +772,33 @@
     <article class="project reveal">
       <div class="project-top">
         <div class="project-main">
-          <span class="p-index">03 / analytics</span>
+          <span class="p-index">03 / healthcare</span>
           <div class="p-titlerow">
-            <h3>TalentPulse</h3>
-            <span class="status design"><i></i>In design · planned</span>
+            <h3>MedSignal</h3>
+            <span class="status design"><i></i>In design &middot; planned</span>
           </div>
-          <div class="p-kind">Job Market Intelligence · Data + Analytics Engineering</div>
-          <p class="p-desc">A job market intelligence pipeline that collects job postings, extracts required skills, stores structured job data in PostgreSQL, and analyzes hiring trends for data engineering and analytics roles. It's designed to show end-to-end skills — ingestion, text parsing, modeling, transformation, and SQL analytics — while producing practical, shareable insights.</p>
+          <div class="p-kind">Drug Safety &amp; Adverse Event Analytics &middot; API Ingestion Pipeline</div>
+          <p class="p-desc">A drug-safety pipeline that ingests public adverse-event reports from the FDA&rsquo;s openFDA API, stores raw responses separately from cleaned records, and analyzes which drugs and reactions appear most often. It&rsquo;s built entirely on de-identified, publicly reported data &mdash; no patient records &mdash; reflecting the privacy-first mindset healthcare data work requires.</p>
 
           <div class="p-block">
             <span class="bl">Planned scope</span>
             <ul class="p-list planned">
-              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Ingest postings from open datasets</li>
-              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Parse title, company, location, type</li>
-              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Extract &amp; normalize skill names</li>
-              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Model jobs · companies · skills · mappings</li>
-              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Compare internship vs junior demand</li>
-              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Weekly job-market reports</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Ingest reports from the openFDA REST API</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Handle pagination &amp; rate limits</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Store raw JSON separately from cleaned data</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Normalize drug, reaction &amp; outcome fields</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Validate missing fields, duplicates &amp; dates</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Model &amp; analyze top reactions and trends</li>
             </ul>
           </div>
 
           <div class="p-block">
-            <span class="bl">Why it's useful</span>
-            <p class="p-desc" style="margin-top:0;">It doubles as a research tool for my own job search — surfacing which tools (SQL, Python, Spark, Airflow, dbt, cloud) show up most in entry-level roles, and what an early-career candidate should prioritize learning. Data collection starts safely with open Kaggle-style datasets, not scraping.</p>
+            <span class="bl">Why it&rsquo;s strong</span>
+            <p class="p-desc" style="margin-top:0;">It adds external-API ingestion &mdash; pagination, rate limits, and nested JSON &mdash; which the other two projects don&rsquo;t cover, and it&rsquo;s built on de-identified public data, showing the privacy-awareness healthcare teams value. Questions it answers: which reactions are most reported for a drug, how report volumes shift over time, and which outcomes appear most often.</p>
           </div>
 
           <div class="p-stack">
-            <span>Python</span><span>SQL</span><span>PostgreSQL</span><span>Pandas</span><span>Regex / basic NLP</span><span>Git</span>
+            <span>Python</span><span>SQL</span><span>PostgreSQL</span><span>Requests</span><span>Pandas</span><span>JSON</span><span>Git</span>
           </div>
           <div class="p-actions">
             <a href="https://github.com/srikanthbattula9" target="_blank" rel="noopener" class="btn btn-ghost">
@@ -810,15 +810,15 @@
         <div class="project-side">
           <div class="arch-label">// pipeline</div>
           <div class="arch">
-            <div class="arch-stage"><span class="as-num">01</span><span class="as-txt"><b>job postings</b><small>open datasets</small></span></div>
+            <div class="arch-stage"><span class="as-num">01</span><span class="as-txt"><b>openFDA API</b><small>public adverse-event reports</small></span></div>
             <div class="arch-link"></div>
-            <div class="arch-stage"><span class="as-num">02</span><span class="as-txt"><b>Python ingest</b><small>raw_job_postings</small></span></div>
+            <div class="arch-stage"><span class="as-num">02</span><span class="as-txt"><b>Python ingest</b><small>raw JSON &middot; pagination</small></span></div>
             <div class="arch-link"></div>
-            <div class="arch-stage"><span class="as-num">03</span><span class="as-txt"><b>extract skills</b><small>parse + normalize</small></span></div>
+            <div class="arch-stage"><span class="as-num">03</span><span class="as-txt"><b>parse + normalize</b><small>drugs &middot; reactions</small></span></div>
             <div class="arch-link"></div>
-            <div class="arch-stage"><span class="as-num">04</span><span class="as-txt"><b>analytics model</b><small>jobs · skills · mappings</small></span></div>
+            <div class="arch-stage"><span class="as-num">04</span><span class="as-txt"><b>validate</b><small>fields &middot; duplicates &middot; dates</small></span></div>
             <div class="arch-link"></div>
-            <div class="arch-stage"><span class="as-num">05</span><span class="as-txt"><b>insights</b><small>reports + trends</small></span></div>
+            <div class="arch-stage"><span class="as-num">05</span><span class="as-txt"><b>analytics model</b><small>PostgreSQL + SQL</small></span></div>
           </div>
         </div>
       </div>
