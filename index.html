@@ -643,7 +643,7 @@
     <div class="sec-head reveal">
       <span class="eyebrow">Projects</span>
       <h2>Three projects, three domains — one engineering approach.</h2>
-      <p>A flagship pipeline being built now, plus two data platforms in design across city mobility and healthcare. I’m building them one at a time — starting with a defensible MVP rather than all at once.</p>
+      <p>A flagship pipeline being built now, plus two data platforms in design across local commerce and healthcare. I’m building them one at a time — starting with a defensible MVP rather than all at once.</p>
     </div>
 
     <!-- PROJECT 1 -->
@@ -716,33 +716,33 @@
     <article class="project reveal">
       <div class="project-top">
         <div class="project-main">
-          <span class="p-index">02 / data platform</span>
+          <span class="p-index">02 / local commerce</span>
           <div class="p-titlerow">
-            <h3>UrbanFlow Data Platform</h3>
-            <span class="status design"><i></i>In design · planned</span>
+            <h3>LocalLoop</h3>
+            <span class="status design"><i></i>In design &middot; planned</span>
           </div>
-          <div class="p-kind">City Mobility &amp; Traffic Analytics · Batch + Analytics Pipeline</div>
-          <p class="p-desc">A city mobility data platform that ingests traffic, transit, weather, and incident datasets to analyze congestion patterns, travel delays, and road safety trends. The plan is a pipeline that cleans, validates, and transforms public urban data in PostgreSQL, keeping raw source data separate from analytics-ready reporting tables.</p>
+          <div class="p-kind">Local Vendor Intelligence &middot; Event-Driven Analytics Pipeline</div>
+          <p class="p-desc">An event-driven data platform that captures anonymous NFC / QR interactions between households and local service vendors &mdash; plumbers, electricians, AC technicians, tiffin services &mdash; then validates, transforms, and analyzes them into vendor-retention, service-category, and locality-level metrics. Customer data stays private; vendors see only aggregated, anonymous insights.</p>
 
           <div class="p-block">
             <span class="bl">Planned scope</span>
             <ul class="p-list planned">
-              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Ingest public CSV / API datasets</li>
-              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Separate raw &amp; cleaned tables</li>
-              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Validate timestamps &amp; location fields</li>
-              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Analytics-ready warehouse schema</li>
-              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>SQL congestion &amp; incident analysis</li>
-              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Dashboard-ready summary tables</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Ingest raw NFC / QR tap &amp; save events</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Validate &amp; deduplicate interaction events</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Separate raw, cleaned &amp; analytics-ready layers</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Model vendors, localities, events &amp; metrics in PostgreSQL</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Build vendor-retention &amp; repeat-business analytics</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Serve aggregated metrics via FastAPI</li>
             </ul>
           </div>
 
           <div class="p-block">
-            <span class="bl">Questions it will answer</span>
-            <p class="p-desc" style="margin-top:0;">Which locations see the most incidents, what times of day have the worst congestion, how weather affects delays, and how weekday and weekend traffic patterns differ — using public datasets like NYC / DC / Maryland open traffic and collision data plus historical weather.</p>
+            <span class="bl">Privacy-first by design</span>
+            <p class="p-desc" style="margin-top:0;">Customer identities are never exposed &mdash; vendors see only aggregated metrics like profile taps, saves, repeat-interaction rate, and locality trends. Questions it answers: which categories and localities see the most repeat activity, what share of saves lead to repeat service, and which vendors grow month over month.</p>
           </div>
 
           <div class="p-stack">
-            <span>Python</span><span>SQL</span><span>PostgreSQL</span><span>Pandas</span><span>FastAPI (optional)</span><span>Power BI / Tableau (optional)</span><span>Git</span>
+            <span>Python</span><span>SQL</span><span>PostgreSQL</span><span>FastAPI</span><span>SQLAlchemy</span><span>Pandas</span><span>dbt</span><span>Airflow</span><span>Docker</span><span>Git</span>
           </div>
           <div class="p-actions">
             <a href="https://github.com/srikanthbattula9" target="_blank" rel="noopener" class="btn btn-ghost">
@@ -754,15 +754,15 @@
         <div class="project-side">
           <div class="arch-label">// pipeline</div>
           <div class="arch">
-            <div class="arch-stage"><span class="as-num">01</span><span class="as-txt"><b>public datasets</b><small>traffic · transit · weather · incidents</small></span></div>
+            <div class="arch-stage"><span class="as-num">01</span><span class="as-txt"><b>NFC / QR tap</b><small>raw interaction events</small></span></div>
             <div class="arch-link"></div>
-            <div class="arch-stage"><span class="as-num">02</span><span class="as-txt"><b>Python ingest</b><small>raw PostgreSQL tables</small></span></div>
+            <div class="arch-stage"><span class="as-num">02</span><span class="as-txt"><b>validate + dedup</b><small>clean tap &amp; save events</small></span></div>
             <div class="arch-link"></div>
-            <div class="arch-stage"><span class="as-num">03</span><span class="as-txt"><b>clean + validate</b><small>quality checks</small></span></div>
+            <div class="arch-stage"><span class="as-num">03</span><span class="as-txt"><b>PostgreSQL</b><small>operational storage</small></span></div>
             <div class="arch-link"></div>
-            <div class="arch-stage"><span class="as-num">04</span><span class="as-txt"><b>analytics tables</b><small>reporting-ready</small></span></div>
+            <div class="arch-stage"><span class="as-num">04</span><span class="as-txt"><b>ETL / transform</b><small>dbt &middot; analytics model</small></span></div>
             <div class="arch-link"></div>
-            <div class="arch-stage"><span class="as-num">05</span><span class="as-txt"><b>SQL reports</b><small>dashboard outputs</small></span></div>
+            <div class="arch-stage"><span class="as-num">05</span><span class="as-txt"><b>metrics + API</b><small>retention &middot; locality &middot; FastAPI</small></span></div>
           </div>
         </div>
       </div>
