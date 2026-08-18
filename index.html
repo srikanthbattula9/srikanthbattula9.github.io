@@ -937,7 +937,7 @@
         <p>Software and data engineer with about 2 years at redBus (India's largest online bus ticketing platform) and an MS in Information Systems and Technology from Wilmington University. Built production features in Python, ran performance testing on APIs, and worked on AI snippet integration. Master's capstone: a streaming CDC pipeline with Debezium, Kafka, Flink, and Delta Lake. Seeking Software Engineering and Data Engineering roles.</p>
         <div class="p-actions" style="margin-top:24px;">
           <!-- Point this href at your PDF once it's ready -->
-          <a href="#" class="btn btn-primary" id="resumeDownload">
+          <a href="Srikanth_Resume.pdf" download class="btn btn-primary" id="resumeDownload">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>
             Download résumé (PDF)
           </a>
@@ -1047,12 +1047,6 @@
     });
   }, {rootMargin:'-45% 0px -50% 0px'});
   sections.forEach(s => s && spy.observe(s));
-
-  // Friendly reminder if resume link not yet wired up
-  document.getElementById('resumeDownload').addEventListener('click', (e) => {
-    const href = e.currentTarget.getAttribute('href');
-    if (href === '#'){ e.preventDefault(); alert('Add your résumé PDF, then point this button\'s href at the file.'); }
-  });
 
   // Respect reduced motion for SVG (SMIL) animations
   if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches){
