@@ -513,7 +513,7 @@
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.2.8-.5v-2c-3.2.7-3.9-1.4-3.9-1.4-.5-1.3-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.7 1.3 3.4 1 .1-.8.4-1.3.8-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.4-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.2 1.2a11 11 0 0 1 5.8 0C17.3 5 18.3 5.3 18.3 5.3c.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .3.2.6.8.5 4.6-1.5 7.9-5.8 7.9-10.9C23.5 5.7 18.3.5 12 .5Z"/></svg>
           GitHub
         </a>
-        <a href="https://linkedin.com/in/srikanth-b-094646421" target="_blank" rel="noopener" class="btn btn-ghost">
+        <a href="https://www.linkedin.com/in/srikanth-mcu" target="_blank" rel="noopener" class="btn btn-ghost">
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.26 2.37 4.26 5.45v6.29ZM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12ZM7.12 20.45H3.56V9h3.56v11.45ZM22.22 0H1.77C.8 0 0 .78 0 1.74v20.52C0 23.22.8 24 1.77 24h20.45c.98 0 1.78-.78 1.78-1.74V1.74C24 .78 23.2 0 22.22 0Z"/></svg>
           LinkedIn
         </a>
@@ -545,7 +545,7 @@
           <div class="flow-connector"></div>
           <div class="flow-node future">
             <span class="n-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M2 12h4M18 12h4M4.9 19.1l2.8-2.8M16.3 7.7l2.8-2.8"/></svg></span>
-            <span class="n-txt"><b>process</b><small>OCR, translation — planned</small></span>
+            <span class="n-txt"><b>process</b><small>OCR built &middot; translation planned</small></span>
           </div>
         </div>
         <div class="panel-foot">
@@ -667,7 +667,7 @@
     <div class="sec-head reveal">
       <span class="eyebrow">Projects</span>
       <h2>From streaming CDC to local commerce — one engineering approach.</h2>
-      <p>A streaming CDC platform built as my Master’s capstone, a completed traffic-sign pipeline, a vendor-analytics platform in progress, and where it all started — an RFID system in my B.Tech.</p>
+      <p>A streaming CDC platform built as my Master’s capstone, a traffic-sign intelligence system that now reads signs with OCR, a vendor-analytics platform in progress, and where it all started — an RFID system in my B.Tech.</p>
     </div>
 
     <!-- PROJECT 01 — CDC CAPSTONE -->
@@ -732,7 +732,7 @@
             <span class="status done"><i></i>Core pipeline complete</span>
           </div>
           <div class="p-kind">Traffic Sign Intelligence · Event-Driven Backend Pipeline</div>
-          <p class="p-desc">A traffic sign intelligence pipeline that processes traffic sign images and metadata through raw ingestion, validation, PostgreSQL storage, and duplicate handling — designed so future OCR, translation, and driver-alert workflows can build on the same foundation. The database separates raw ingestion events from processed records, so data can be reprocessed later with better models.</p>
+          <p class="p-desc">A system that turns what a camera sees on the road — traffic signs in any language — into something a driver can understand and act on: what the sign says, in their language, and why it matters. Imagine driving in Japan and a sign flashes past: &#27490;&#12414;&#12428;. DriveLingo sees it, reads it with OCR, understands it (&ldquo;Stop&rdquo; &middot; regulatory), translates it, and explains why it matters &mdash; while raw events stay separate from processed records so everything can be reprocessed with better models.</p>
 
           <div class="p-block">
             <span class="bl">What I built</span>
@@ -743,6 +743,7 @@
               <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>404 + 409 duplicate handling</li>
               <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Unique index + IntegrityError rollback</li>
               <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>.env-based config &amp; raw ingestion table</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>OCR worker extracting sign text from images</li>
             </ul>
           </div>
 
@@ -754,15 +755,15 @@
           <div class="p-block">
             <span class="bl">Roadmap</span>
             <ul class="p-list planned">
-              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Image upload endpoint</li>
-              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>OCR + language detection</li>
-              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Translation + driver alerts</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Language detection + translation</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>AI-generated safety explanations</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Driver alerts + analytics (OCR confidence, sign frequency by region)</li>
               <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Docker + cloud deployment</li>
             </ul>
           </div>
 
           <div class="p-stack">
-            <span>Python</span><span>FastAPI</span><span>PostgreSQL</span><span>SQLAlchemy</span><span>Pydantic</span><span>SQL</span><span>Git</span>
+            <span>Python</span><span>FastAPI</span><span>PostgreSQL</span><span>SQLAlchemy</span><span>Pydantic</span><span>OCR</span><span>SQL</span><span>Git</span>
           </div>
           <div class="p-actions">
             <a href="https://github.com/srikanthbattula9" target="_blank" rel="noopener" class="btn btn-primary" data-cursor="Open repo">
@@ -780,9 +781,9 @@
             <div class="arch-link"></div>
             <div class="arch-stage"><span class="as-num">03</span><span class="as-txt"><b>PostgreSQL</b><small>constraints + unique index</small></span></div>
             <div class="arch-link"></div>
-            <div class="arch-stage future"><span class="as-num">04</span><span class="as-txt"><b>OCR / translate</b><small>planned</small></span></div>
+            <div class="arch-stage"><span class="as-num">04</span><span class="as-txt"><b>OCR</b><small>sign text extracted</small></span></div>
             <div class="arch-link"></div>
-            <div class="arch-stage future"><span class="as-num">05</span><span class="as-txt"><b>driver alerts</b><small>planned</small></span></div>
+            <div class="arch-stage future"><span class="as-num">05</span><span class="as-txt"><b>translate + alert</b><small>planned</small></span></div>
           </div>
         </div>
       </div>
@@ -961,7 +962,7 @@
         </div>
         <div class="rrow">
           <div class="rk">Contact</div>
-          <div class="rv">srikanth.mcu@gmail.com · +1 (252) 284-5365 · Rockville, MD · linkedin.com/in/srikanth-b-094646421 · github.com/srikanthbattula9</div>
+          <div class="rv">srikanth.mcu@gmail.com · +1 (252) 284-5365 · Rockville, MD · www.linkedin.com/in/srikanth-mcu · github.com/srikanthbattula9</div>
         </div>
       </div>
     </div>
@@ -983,7 +984,7 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
         +1 (252) 284-5365
       </a>
-      <a href="https://linkedin.com/in/srikanth-b-094646421" target="_blank" rel="noopener" class="btn btn-ghost">
+      <a href="https://www.linkedin.com/in/srikanth-mcu" target="_blank" rel="noopener" class="btn btn-ghost">
         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.26 2.37 4.26 5.45v6.29ZM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12ZM7.12 20.45H3.56V9h3.56v11.45ZM22.22 0H1.77C.8 0 0 .78 0 1.74v20.52C0 23.22.8 24 1.77 24h20.45c.98 0 1.78-.78 1.78-1.74V1.74C24 .78 23.2 0 22.22 0Z"/></svg>
         LinkedIn
       </a>
@@ -1002,7 +1003,7 @@
     <span class="fl">© <span id="year"></span> Srikanth · Rockville, MD</span>
     <div class="foot-links">
       <a href="mailto:srikanth.mcu@gmail.com">Email</a>
-      <a href="https://linkedin.com/in/srikanth-b-094646421" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://www.linkedin.com/in/srikanth-mcu" target="_blank" rel="noopener">LinkedIn</a>
       <a href="https://github.com/srikanthbattula9" target="_blank" rel="noopener">GitHub</a>
     </div>
   </div>
