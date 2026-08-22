@@ -268,6 +268,10 @@
   .status.design{background:var(--amber-soft);color:var(--amber);border:1px solid var(--amber-line);}
   .status.design i{background:var(--amber);}
   .status.done{background:var(--accent-soft);color:var(--accent);border:1px solid var(--accent-line);}
+  .cred-badge{margin-top:14px;padding-top:14px;border-top:1px solid var(--line);display:flex;flex-direction:column;align-items:center;gap:8px;}
+  .cred-badge iframe{max-width:100%;border:0;}
+  .cred-link{font-family:var(--mono);font-size:12px;color:var(--accent);text-decoration:none;}
+  .cred-link:hover{text-decoration:underline;}
   .status.done i{background:var(--accent);}
   .p-kind{font-family:var(--mono);font-size:12px;color:var(--ink-3);margin-top:6px;}
   .p-desc{color:var(--ink-2);margin-top:18px;font-size:15.5px;line-height:1.65;max-width:60ch;}
@@ -501,8 +505,8 @@
     <div class="hero-copy reveal">
       <span class="eyebrow">Software &amp; Data Engineer</span>
       <h1 class="name">Srikanth</h1>
-      <div class="role">Python · SQL · Kafka · Flink · PostgreSQL · FastAPI</div>
-      <p class="sub">Nearly 2 years of engineering at redBus, an MS from Wilmington University, and a streaming CDC platform built as my capstone — now building data &amp; software projects end to end.</p>
+      <div class="role">AWS Certified · Python · SQL · Kafka · Flink · PostgreSQL</div>
+      <p class="sub">AWS Certified Data Engineer. Nearly 2 years of engineering at redBus, an MS from Wilmington University, and a streaming CDC platform built as my capstone — now building data &amp; software projects end to end.</p>
       <p class="intro">I'm actively seeking Software Engineering and Data Engineering roles in the US — and documenting what I build along the way.</p>
       <div class="hero-actions">
         <a href="#projects" class="btn btn-primary">
@@ -586,7 +590,11 @@
         </div>
         <div class="fact">
           <span class="f-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 17l6-6-6-6"/><path d="M12 19h8"/></svg></span>
-          <div><b>~2 yrs @ redBus</b><small>Intern &rarr; full-time Software Engineer</small></div>
+          <div><b>AWS Certified Data Engineer</b><small>Associate &middot; 2026 &middot; Databricks next</small></div>
+        </div>
+        <div class="cred-badge">
+          <div data-iframe-width="150" data-iframe-height="270" data-share-badge-id="67c9f4d8-cc2d-4629-a64b-dddcf5720efb" data-share-badge-host="https://www.credly.com"></div>
+          <a class="cred-link" href="https://www.credly.com/badges/67c9f4d8-cc2d-4629-a64b-dddcf5720efb/public_url" target="_blank" rel="noopener">Verify AWS certification on Credly &rarr;</a>
         </div>
         <div class="open-to">
           <span class="lbl">Open to</span>
@@ -655,7 +663,7 @@
       </div>
       <div class="skill-card learning reveal">
         <div class="sc-head"><span class="sc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v3M12 18v3M5 12H2M22 12h-3M6 6l-2-2M18 6l2-2"/><circle cx="12" cy="12" r="4"/></svg></span><h4>Learning Next</h4><span class="learning-tag">Currently learning</span></div>
-        <div class="skill-list"><span>AWS (Data Engineer cert prep)</span><span>Databricks cert prep</span><span>Cloud deployment</span><span>Snowflake / BigQuery</span></div>
+        <div class="skill-list"><span>AWS (certified)</span><span>Databricks cert prep</span><span>PySpark</span><span>Cloud deployment</span><span>Snowflake / BigQuery</span></div>
       </div>
     </div>
   </div>
@@ -918,7 +926,7 @@
         <span class="day">This week</span>
         <h4>Progress check</h4>
         <p>FastAPI backend, PostgreSQL schema design, duplicate handling, environment config, Git feature branches, and raw event ingestion. Still early, but building a real project step by step is showing me how data actually moves through a system.</p>
-        <div class="takeaway">Next focus: <b>LocalLoop build, AWS Data Engineer cert, and rebuilding the CDC capstone in public.</b></div>
+        <div class="takeaway">Next focus: <b>rebuilding the CDC capstone on AWS in public, Databricks certification, and finishing LocalLoop.</b></div>
       </div>
     </div>
   </div>
@@ -933,8 +941,8 @@
     </div>
     <div class="resume-grid">
       <div class="resume-card reveal">
-        <div class="rc-title">Software &amp; Data Engineer · Python · SQL · Kafka · PostgreSQL</div>
-        <p>Software and data engineer with about 2 years at redBus (India's largest online bus ticketing platform) and an MS in Information Systems and Technology from Wilmington University. Built production features in Python, ran performance testing on APIs, and worked on AI snippet integration. Master's capstone: a streaming CDC pipeline with Debezium, Kafka, Flink, and Delta Lake. Seeking Software Engineering and Data Engineering roles.</p>
+        <div class="rc-title">Software &amp; Data Engineer · AWS Certified · Python · SQL · Kafka</div>
+        <p>Software and data engineer with about 2 years at redBus (India's largest online bus ticketing platform) and an MS in Information Systems and Technology from Wilmington University. Built production features in Python, ran performance testing on APIs, and worked on AI snippet integration. AWS Certified Data Engineer &ndash; Associate. Master's capstone: a streaming CDC pipeline with Debezium, Kafka, Flink, and Delta Lake. Seeking Software Engineering and Data Engineering roles.</p>
         <div class="p-actions" style="margin-top:24px;">
           <!-- Point this href at your PDF once it's ready -->
           <a href="Srikanth_Resume.pdf" download class="btn btn-primary" id="resumeDownload">
@@ -950,7 +958,7 @@
         </div>
         <div class="rrow">
           <div class="rk">Currently learning</div>
-          <div class="rv">AWS Certified Data Engineer (in prep) · Databricks Data Engineer (in prep) · Cloud deployment</div>
+          <div class="rv"><b>AWS Certified Data Engineer &ndash; Associate</b> (2026) · Databricks Data Engineer Associate (scheduled)</div>
         </div>
         <div class="rrow">
           <div class="rk">Experience</div>
@@ -1156,5 +1164,6 @@
   })();
 
 </script>
+<script type="text/javascript" async src="https://cdn.credly.com/assets/utilities/embed.js"></script>
 </body>
 </html>
